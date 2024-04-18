@@ -14,4 +14,6 @@ jobs:
         with:
           python-version: '3.x'
       - name: Create Releases
-        run: python main.py
+        run: |
+          pip install -r requirements.txt
+          python main.py
