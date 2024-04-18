@@ -36,8 +36,8 @@ def create_release(url, release_key, release_title):
         download_file(absolute_url, Path(file_name))
     try:
       subprocess.run(["ls", "-la"])
-      subprocess.run(["gh", "release", "create", release_key, "$(ls *tomcat*)", "-t", release_title])
-      subprocess.run(["rm", "*tomcat*"])
+      subprocess.run(["gh", "release", "create", release_key, "$(ls *tomcat*)", "-t", release_title], shell=True)
+      subprocess.run(["rm", "*tomcat*"], shell=True)
     except subprocess.CalledProcessError as e:
       print(e.output.decode("utf-8"))
       exit(1)
