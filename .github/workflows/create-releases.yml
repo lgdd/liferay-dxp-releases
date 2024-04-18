@@ -1,0 +1,17 @@
+name: Create Releases
+
+on:
+  push:
+
+jobs:
+  create-releases:
+    runs-on: ubuntu-latest
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+      - name: Create Releases
+        run: python main.py
