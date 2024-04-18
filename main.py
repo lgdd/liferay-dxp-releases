@@ -21,7 +21,7 @@ def download_file(url, filename):
             bar.update(len(data))
             file.write(data)
 
-def create_release(url):
+def create_release(url, release_key, release_title):
   try:
     response = requests.get(url, timeout=5)
     response.raise_for_status()
@@ -34,7 +34,7 @@ def create_release(url):
         file_name = link["href"]
         absolute_url = url + "/" + file_name
         download_file(absolute_url, Path(file_name))
-    subprocess.run(["gh", "release", "create", releaseKey, "$(ls *tomcat*)"])
+    subprocess.run(["gh", "release", "create", release_key, "$(ls *tomcat*)", "-t", release_title])
     subprocess.run(["rm", "*tomcat*"])
   except requests.exceptions.Timeout:
     print("Timed out for {0}".format(url))
@@ -44,15 +44,16 @@ if __name__ == "__main__":
   releases.reverse()
   for release in releases:
     url = release["url"]
-    releaseKey = release["releaseKey"]
+    release_key = release["releaseKey"]
+    release_title = release["productVersion"]
     try:
       subprocess.check_output(
-        ["gh", "release", "view", releaseKey],
+        ["gh", "release", "view", release_key],
         stderr=subprocess.STDOUT)
     except subprocess.CalledProcessError as e:
       error_message = e.output.decode("utf-8")
       if "release not found" in error_message:
-        create_release(url)
+        create_release(url, release_key, release_title)
       else:
         print(error_message)
         exit(1)
