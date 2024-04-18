@@ -36,8 +36,10 @@ def create_release(url, release_key, release_title):
         absolute_url = url + "/" + file_name
         download_file(absolute_url, Path(file_name))
     try:
+      print("Creating release '" + release_title + "' with tag '" + release_key + "'...")
       cmd_create_release = "gh release create " + release_key + " $(ls *tomcat*) -t '" + release_title + "'"
       subprocess.run(cmd_create_release, shell=True)
+      print("Cleaning assets...")
       subprocess.run("rm *tomcat*", shell=True)
     except subprocess.CalledProcessError as e:
       print(e.output.decode("utf-8"))
@@ -58,6 +60,7 @@ if __name__ == "__main__":
       subprocess.check_output(
         ["gh", "release", "view", release_key],
         stderr=subprocess.STDOUT)
+      print("Release '" + release_title + "' already exists.")
     except subprocess.CalledProcessError as e:
       error_message = e.output.decode("utf-8")
       if "release not found" in error_message:
