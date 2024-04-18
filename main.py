@@ -24,7 +24,7 @@ def download_file(url, filename):
 
 def create_release(url, release_key, release_title):
   try:
-    response = requests.get(url, timeout=5)
+    response = requests.get(url, timeout=10)
     response.raise_for_status()
 
     soup = BeautifulSoup(response.content, 'html.parser')
