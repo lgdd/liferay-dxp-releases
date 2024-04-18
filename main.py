@@ -41,6 +41,7 @@ def create_release(url, release_key, release_title):
     print("Timed out for {0}".format(url))
 
 if __name__ == "__main__":
+  subprocess.run(["gh", "config", "set", "prompt", "disabled"])
   releases = json.loads(requests.get("https://raw.githubusercontent.com/lgdd/liferay-product-info/main/releases.json").text)
   releases.reverse()
   for release in releases:
