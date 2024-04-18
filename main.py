@@ -30,14 +30,14 @@ def create_release(url, release_key, release_title):
     links = soup.find_all("a", href=True)
 
     for link in links:
-      if "MD5" in link["href"]:
+      if "tomcat" in link["href"]:
         file_name = link["href"]
         absolute_url = url + "/" + file_name
         download_file(absolute_url, Path(file_name))
     try:
       cmd_create_release = "gh release create " + release_key + " $(ls *tomcat*) -t '" + release_title + "'"
       subprocess.run(cmd_create_release, shell=True)
-      subprocess.run("rm *.MD5", shell=True)
+      subprocess.run("rm *tomcat*", shell=True)
     except subprocess.CalledProcessError as e:
       print(e.output.decode("utf-8"))
       exit(1)
