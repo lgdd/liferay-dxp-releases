@@ -1,6 +1,7 @@
 import json
 import requests
 import subprocess
+from dotenv import load_dotenv
 from tqdm import tqdm
 from pathlib import Path
 from bs4 import BeautifulSoup
@@ -45,6 +46,7 @@ def create_release(url, release_key, release_title):
     print("Timed out for {0}".format(url))
 
 if __name__ == "__main__":
+  load_dotenv()
   subprocess.run(["gh", "config", "set", "prompt", "disabled"])
   releases = json.loads(requests.get("https://raw.githubusercontent.com/lgdd/liferay-product-info/main/releases.json").text)
   releases.reverse()
