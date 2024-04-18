@@ -63,7 +63,5 @@ if __name__ == "__main__":
       if "release not found" in error_message:
         create_release(url, release_key, release_title)
       else:
-        print("===========================")
         print(error_message)
-        print("===========================")
         exit(1)
