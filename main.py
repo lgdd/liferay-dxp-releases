@@ -34,9 +34,13 @@ def create_release(url, release_key, release_title):
         file_name = link["href"]
         absolute_url = url + "/" + file_name
         download_file(absolute_url, Path(file_name))
-    subprocess.run(["ls", "-la"])
-    subprocess.run(["gh", "release", "create", release_key, "$(ls *tomcat*)", "-t", release_title])
-    subprocess.run(["rm", "*tomcat*"])
+    try:
+      subprocess.run(["ls", "-la"])
+      subprocess.run(["gh", "release", "create", release_key, "$(ls *tomcat*)", "-t", release_title])
+      subprocess.run(["rm", "*tomcat*"])
+    except subprocess.CalledProcessError as e:
+      print(e.output.decode("utf-8"))
+      exit(1)
   except requests.exceptions.Timeout:
     print("Timed out for {0}".format(url))
 
