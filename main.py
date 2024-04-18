@@ -22,22 +22,26 @@ def download_file(url, filename):
             file.write(data)
 
 def create_release(url):
-  response = requests.get(url)
-  response.raise_for_status()
+  try:
+    response = requests.get(url, timeout=5)
+    response.raise_for_status()
 
-  soup = BeautifulSoup(response.content, 'html.parser')
-  links = soup.find_all("a", href=True)
+    soup = BeautifulSoup(response.content, 'html.parser')
+    links = soup.find_all("a", href=True)
 
-  for link in links:
-    if "tomcat" in link["href"]:
-      file_name = link["href"]
-      absolute_url = url + "/" + file_name
-      download_file(absolute_url, Path(file_name))
-  subprocess.run(["gh", "release", "create", releaseKey, "$(ls *tomcat*)"])
-  subprocess.run(["rm", "*tomcat*"])
+    for link in links:
+      if "tomcat" in link["href"]:
+        file_name = link["href"]
+        absolute_url = url + "/" + file_name
+        download_file(absolute_url, Path(file_name))
+    subprocess.run(["gh", "release", "create", releaseKey, "$(ls *tomcat*)"])
+    subprocess.run(["rm", "*tomcat*"])
+  except requests.exceptions.Timeout:
+    print("Timed out for {0}".format(url))
 
 if __name__ == "__main__":
   releases = json.loads(requests.get("https://raw.githubusercontent.com/lgdd/liferay-product-info/main/releases.json").text)
+  releases.reverse()
   for release in releases:
     url = release["url"]
     releaseKey = release["releaseKey"]
