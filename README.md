@@ -13,5 +13,8 @@ liferay.workspace.product=dxp-2024.q1.5
 liferay.workspace.bundle.url=https://github.com/lgdd/liferay-releases/releases/download/dxp-2024.q1.5/liferay-dxp-tomcat-2024.q1.5-1712566347.tar.gz
 ```
 
-> [!NOTE]  
+> [!NOTE]
 > Releases are not sorted in a chronological order. Make sure to use the search bar to find the edition and version you're looking for.
+
+> [!WARNING]
+> Releases found in the JSON file might not be available as a release in this repository. The script currently uses a 10 seconds timeout for each release URL found. The timeouts found at the time of the GitHub action execution are reported [here](timeout.md).
