@@ -46,6 +46,9 @@ def create_release(url, release_key, release_title):
       exit(1)
   except requests.exceptions.Timeout:
     print("Timed out for {0}".format(url))
+  except requests.exceptions.HTTPError as e:
+      error_message = e.output.decode("utf-8")
+      print(error_message)
 
 if __name__ == "__main__":
   load_dotenv()
