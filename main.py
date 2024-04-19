@@ -7,6 +7,7 @@ from pathlib import Path
 from bs4 import BeautifulSoup
 
 def download_file(url, filename):
+  try:
     response = requests.get(url, stream=True)
     response.raise_for_status()
     total_size = int(response.headers.get('content-length', 0))
@@ -21,6 +22,8 @@ def download_file(url, filename):
         for data in response.iter_content(block_size):
             bar.update(len(data))
             file.write(data)
+  except requests.exceptions.RequestException as e:
+    print(e)
 
 def create_release(url, release_key, release_title):
   try:
@@ -47,8 +50,7 @@ def create_release(url, release_key, release_title):
   except requests.exceptions.Timeout:
     print("Timed out for {0}".format(url))
   except requests.exceptions.HTTPError as e:
-      error_message = e.output.decode("utf-8")
-      print(error_message)
+      print(e)
 
 if __name__ == "__main__":
   load_dotenv()
