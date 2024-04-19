@@ -72,4 +72,3 @@ if __name__ == "__main__":
           create_release(url, release_key, release_title)
         else:
           print(error_message)
-          exit(1)
