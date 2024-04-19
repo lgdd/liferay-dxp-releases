@@ -49,7 +49,7 @@ def create_release(url, release_key, release_title):
 
 if __name__ == "__main__":
   load_dotenv()
-  subprocess.run(["gh", "config", "set", "prompt", "disabled"])
+  subprocess.run("gh config set prompt disabled", shell=True)
   releases = json.loads(requests.get("https://raw.githubusercontent.com/lgdd/liferay-product-info/main/releases.json").text)
   releases.reverse()
   for release in releases:
@@ -58,7 +58,8 @@ if __name__ == "__main__":
     release_title = release["productVersion"]
     try:
       subprocess.check_output(
-        ["gh", "release", "view", release_key],
+        "gh release view {0}".format(release_key),
+        shell=True,
         stderr=subprocess.STDOUT)
       print("Release '" + release_title + "' already exists.")
     except subprocess.CalledProcessError as e:
