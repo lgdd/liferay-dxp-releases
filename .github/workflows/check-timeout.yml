@@ -11,7 +11,7 @@ permissions:
   contents: write
 
 jobs:
-  create-releases:
+  check-timeout:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
