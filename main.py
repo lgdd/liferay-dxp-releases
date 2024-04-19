@@ -59,16 +59,17 @@ if __name__ == "__main__":
     url = release["url"]
     release_key = release["releaseKey"]
     release_title = release["productVersion"]
-    try:
-      subprocess.check_output(
-        "gh release view {0}".format(release_key),
-        shell=True,
-        stderr=subprocess.STDOUT)
-      print("Release '" + release_title + "' already exists.")
-    except subprocess.CalledProcessError as e:
-      error_message = e.output.decode("utf-8")
-      if "release not found" in error_message:
-        create_release(url, release_key, release_title)
-      else:
-        print(error_message)
-        exit(1)
+    if "dxp" in url:
+      try:
+        subprocess.check_output(
+          "gh release view {0}".format(release_key),
+          shell=True,
+          stderr=subprocess.STDOUT)
+        print("Release '" + release_title + "' already exists.")
+      except subprocess.CalledProcessError as e:
+        error_message = e.output.decode("utf-8")
+        if "release not found" in error_message:
+          create_release(url, release_key, release_title)
+        else:
+          print(error_message)
+          exit(1)
