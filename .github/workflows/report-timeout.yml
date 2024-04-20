@@ -1,9 +1,6 @@
 name: Report Timeout
 
 on:
-  push:
-    branches:
-      - main
   schedule:
     - cron: '0 14 * * *'
 
