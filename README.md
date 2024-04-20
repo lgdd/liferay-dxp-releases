@@ -18,5 +18,13 @@ For Liferay Portal (CE), you can refer to the official GitHub repository: https:
 > [!NOTE]
 > Releases are not sorted in a chronological order. Make sure to use the search bar to find the edition and version you're looking for.
 
-> [!WARNING]
-> Releases found in the JSON file might not be available as a release in this repository. The script currently uses a 10 seconds timeout for each release URL found. The timeouts found at the time of the GitHub action execution are reported [here](timeout.md).
+## Timeouts & HTTP errors
+
+At the time of building this, `releases-cdn.liferay.com` is so unstable that I had to increase requests timeout from 10s to 120s to make sure that I don't miss a release.
+
+But since 10s is already huge for getting one of those static pages, I decided to update a report every day using GitHub Actions:
+
+![report](timeout.png)
+
+> [!NOTE]
+> The [script](report.py) requests all the URLs from the [releases.json](https://raw.githubusercontent.com/lgdd/liferay-product-info/main/releases.json) file, [once a day](.github/workflows/create-releases.yml#L8). It does not represent the average of timeouts & HTTP errors in a day.
