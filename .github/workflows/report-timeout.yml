@@ -1,6 +1,9 @@
 name: Report Timeout
 
 on:
+  push:
+    branches:
+      - main
   schedule:
     - cron: '0 12 * * *'
 
@@ -26,4 +29,5 @@ jobs:
           git add timeout.csv
           git add timeout.png
           git commit -am "chore: auto update report" || echo "Nothing to update."
+          git pull --rebase
           git push
