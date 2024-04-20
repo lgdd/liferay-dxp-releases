@@ -8,7 +8,7 @@ permissions:
   contents: write
 
 jobs:
-  check-timeout:
+  report-timeout:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
