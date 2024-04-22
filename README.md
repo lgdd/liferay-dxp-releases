@@ -13,10 +13,15 @@ liferay.workspace.product=dxp-2024.q1.5
 liferay.workspace.bundle.url=https://github.com/lgdd/liferay-dxp-releases/releases/download/dxp-2024.q1.5/liferay-dxp-tomcat-2024.q1.5-1712566347.tar.gz
 ```
 
-For Liferay Portal (CE), you can refer to the official GitHub repository: https://github.com/liferay/liferay-portal/releases
+For Liferay Portal (CE), you can refer to the [official GitHub repository](https://github.com/liferay/liferay-portal/releases):
+
+```properties
+liferay.workspace.product=portal-7.4-ga112
+liferay.workspace.bundle.url=https://github.com/liferay/liferay-portal/releases/download/7.4.3.112-ga112/liferay-ce-portal-tomcat-7.4.3.112-ga112-20240226061339195.tar.gz
+```
 
 > [!NOTE]
-> Releases are not sorted in a chronological order. Make sure to use the search bar to find the edition and version you're looking for.
+> Releases in this repository might not be sorted in a chronological order. Make sure to use the search bar to find the edition and version you're looking for.
 
 ## Timeouts & HTTP errors
 
