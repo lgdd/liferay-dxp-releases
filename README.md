@@ -32,4 +32,4 @@ But since 10s is already huge for getting one of those static pages, I decided t
 ![report](timeout.png)
 
 > [!NOTE]
-> The [script](report.py) requests all the URLs from the [releases.json](https://raw.githubusercontent.com/lgdd/liferay-product-info/main/releases.json) file, [once a day](.github/workflows/create-releases.yml#L8). It does not represent the average of timeouts & HTTP errors in a day.
+> The [script](report.py) requests all the URLs from the [releases.json](https://raw.githubusercontent.com/lgdd/liferay-product-info/main/releases.json) file, [once a day](.github/workflows/create-releases.yml#L8) at noon (UTC time). It does not represent the average of timeouts & HTTP errors in a day.
