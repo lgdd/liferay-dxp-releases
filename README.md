@@ -29,7 +29,8 @@ At the time of building this, `releases-cdn.liferay.com` is so unstable that I h
 
 But since 10s is already huge for getting one of those static pages, I decided to update a report every day using GitHub Actions:
 
-![report](timeout.png)
+![2024](timeout_data/charts/timeout_2024.png)
+![2025](timeout_data/charts/timeout_2025.png)
 
 > [!NOTE]
 > The [script](report.py) requests all the URLs from the [releases.json](https://raw.githubusercontent.com/lgdd/liferay-product-info/main/releases.json) file, [once a day](.github/workflows/create-releases.yml#L8) at noon (UTC time). It does not represent the average of timeouts & HTTP errors in a day.
