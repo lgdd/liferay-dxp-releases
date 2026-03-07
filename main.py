@@ -35,8 +35,8 @@ def create_release(url, release_key, release_title):
 
     for link in links:
       if "tomcat" in link["href"]:
-        file_name = link["href"]
-        absolute_url = url + "/" + file_name
+        file_name = Path(link["href"]).name
+        absolute_url = "https://releases-cdn.liferay.com" + link["href"]
         download_file(absolute_url, Path(file_name))
     try:
       print("Creating release '" + release_title + "' with tag '" + release_key + "'...")
